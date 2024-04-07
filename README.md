@@ -9,7 +9,7 @@ Directory containing my dotfiles for ArchLinux
 ·Terminal: Kitty 0.33.0 
 ·Shell: zsh 5.9 (x86_64-pc-linux-gnu) build on .ohmyzsh
 
-#Installation Requirements
+# Installation Requirements
 ·GNU Stow
 ·Git
 
@@ -32,4 +32,17 @@ stow .
 
 
 # File Structure
-
+.config
+├── hypr
+│   ├── hyprland.conf
+│   ├── hyprpaper.conf
+│   ├── modules
+│   │   ├── binds.conf
+│   │   ├── decoration.conf
+│   │   ├── env.conf
+│   │   ├── general.conf
+│   │   └── rules.conf
+│   └── themes
+│       └── mocha.conf
+└── zsh
+    └── .zshrc

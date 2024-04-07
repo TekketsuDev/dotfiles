@@ -1,7 +1,7 @@
 #Dotfiles
 Directory containing my dotfiles for ArchLinux
 
-#System Requirements
+# System Requirements
 
 ·Arch Based
 ·Linux Kernel: 6.8.2-arch2-1 
@@ -14,13 +14,12 @@ Directory containing my dotfiles for ArchLinux
 ·Git
 
 ```
-    pacman -S git stow
+pacman -S git stow
 ```
 
-#Installation
+# Installation
 Clone the dotfiles in the $HOME directory
 ```
-#HTTP
 git clone https://github.com/TekketsuDev/dotfiles.git
 
 cd dotfiles
@@ -32,17 +31,5 @@ stow .
 ```
 
 
-#File Structure
-.config
-   ├── hypr
-   │   ├── hyprland.conf
-   │   ├── hyprpaper.conf
-   │   ├── modules
-   │   │   ├── binds.conf
-   │   │   ├── decoration.conf
-   │   │   ├── env.conf
-   │   │   ├── general.conf
-   │   │   └── rules.conf
-   │   └── themes
-   │       └── mocha.conf
-   └── zsh
+# File Structure
+

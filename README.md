@@ -1,4 +1,4 @@
-#Dotfiles
+# Dotfiles
 Directory containing my dotfiles for ArchLinux
 ![alt text](https://github.com/TekketsuDev/dotfiles/blob/main/preview.png?raw=true)
 # System Requirements

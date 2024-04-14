@@ -1,0 +1,95 @@
+@import "themes/mocha.css"; 
+
+*{
+	font-size: 14px;
+	font-family: JetBrainsMono Nerd Font Mono;
+
+  /* reference the color by using @color-name */
+  	
+}
+
+window#waybar {
+  /* you can also GTK3 CSS functions! */
+  background-color: transparent;
+  /*background-color: shade(@rosewater, 0.9);*/
+  /*border: 2px solid alpha(@crust, 0.3);*/
+}
+
+#workspaces {
+  margin: 0 5px;
+  background-color: @overlay1;
+  border-radius: 20px;
+}
+.modules-right {
+  margin: 0 5px;
+  background-color: @overlay1;
+  border-radius: 20px;
+}
+#workspaces button:nth-child(1) {
+  color: @lavender; 
+}
+#workspaces button:nth-child(2) {
+  color: @teal; 
+}
+#workspaces button:nth-child(3) {
+  color: @peach;
+}
+#workspaces button:nth-child(4) {
+  color: @yellow;  
+}
+#workspaces button:nth-child(5) {
+  color: @pink;  
+}
+#workspaces button:nth-child(6) {
+  color: @green;  
+}
+#workspaces button:nth-child(7) {
+  color: @red;  
+}
+#workspaces button:nth-child(8) {
+  color: @sky;  
+}
+#workspaces button:nth-child(9) {
+  color: @mauve;  
+}
+#workspaces button:nth-child(10) {
+  color: @flamingo;  
+}
+
+#workspaces button.visible {
+   background: @overlay2;
+   border-radius: 300px;
+}
+    
+
+
+#tray{
+  color: @blue;
+}
+#clock{ 
+  color: @red; 	
+}
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk {
+	padding: 0 10px;
+}
+
+#battery.excelent{
+	color:@sky;
+}
+#battery.good{
+	color:@green;
+}
+#battery.medium{
+	color:@yellow;
+}
+#battery.warining{
+	color:@peach;
+}
+#battery.critical{
+	color:@red;
+}

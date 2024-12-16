@@ -1,50 +1,9 @@
 # Dotfiles
 
-![alt text](https://github.com/TekketsuDev/dotfiles/blob/main/preview.png?raw=true)
-# System Requirements
+# Branch Structure
 
-·Arch Based
-·Linux Kernel: 6.8.2-arch2-1 
-·Hyprland: v0.37.1 
-·Terminal: Kitty 0.33.0 
-·Shell: zsh 5.9 (x86_64-pc-linux-gnu) build on .ohmyzsh
-
-# Installation Requirements
-·GNU Stow
-·Git
-
-```
-pacman -S git stow
-```
-
-# Installation
-Clone the dotfiles in the $HOME directory
-```
-git clone https://github.com/TekketsuDev/dotfiles.git
-
-cd dotfiles
-
-```
-Use GNU Stow to create the symlinks remember to .backup your current files to avoid conflicts 
-```
-stow .
-```
-
-
-# File Structure
-```
-.config
-├── hypr
-│   ├── hyprland.conf
-│   ├── hyprpaper.conf
-│   ├── modules
-│   │   ├── binds.conf
-│   │   ├── decoration.conf
-│   │   ├── env.conf
-│   │   ├── general.conf
-│   │   └── rules.conf
-│   └── themes
-│       └── mocha.conf
-└── zsh
-    └── .zshrc
-```
+> [!danger] Device based branch strategy current state machine
+    - Arch workstation `git checkout archlinux` (main)
+    - Nixos laptop `git checkout nix` (not-supported)
+    - Debian laptop `git checkout piruleta` (empty)
+    - Desired config `git checkout zen` (empty)

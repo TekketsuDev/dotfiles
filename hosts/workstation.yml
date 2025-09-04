@@ -1,7 +1,0 @@
-dotfiles:
-  zsh:
-    files: 
-      - .zshrc
-      - .zprofile
-      - .config/.zsh/modules
-

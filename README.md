@@ -1,8 +1,15 @@
 # Dotfiles
 
+Install all required software if not its not prepared yet for a multisetup package installation 
+
 ## USAGE
 ```bash
-stow -t ~/.config .config
+    git clone https://github.com/TekketsuDev/dotfiles.git
+    cd dotfiles
+    ./dev.sh install
+
+    # Use dev
+    dev
 ```
 ## 🧠 CORE PHILOSOPHY
 
@@ -10,7 +17,7 @@ stow -t ~/.config .config
     
 - [x] Dotfiles managed with `stow`
     
-- [ ] Auto-detect OS + package manager
+- [x] Auto-detect OS + package manager
     
 - [ ] Central YAML-based package declaration system
     
@@ -26,6 +33,8 @@ stow -t ~/.config .config
     
 
 ---
+
+
 
 ## 🐧 ARCH LINUX SYSTEM
 
@@ -54,11 +63,11 @@ stow -t ~/.config .config
 
 ## 🌐 NETWORKING / SECURITY
 
-- [ ] SSH LAN hardening (`setup_ssh_lan.sh`)
+- [x] SSH LAN hardening (`setup_ssh_lan.sh`)
     
 - [ ] Tailscale setup for remote access
     
-- [ ] ProtonVPN auto-connect when off-LAN
+- [x] ProtonVPN auto-connect when off-LAN
     
 - [ ] SSH menu with `rofi -show ssh`
     
@@ -96,7 +105,7 @@ stow -t ~/.config .config
 
 ## 🖥️ DESKTOP + UX
 
-- [ ] Hyprland + Waybar full setup
+- [x] Hyprland + Waybar full setup
     
 - [ ] Dynamic workspaces + rules per monitor
     
@@ -110,13 +119,13 @@ stow -t ~/.config .config
     
 - [x] Added showmethekey functionality
 
-- [ ] Repainting everforest
+- [x] Repainting everforest
    - [x] Waybar
    - [x] Wofi
    - [x] Obsidian
    - [x] kitty
    - [x] hypr
-   - [ ] day_night_cycle
+   - [x] day_night_cycle
 
 
 ---
@@ -144,23 +153,11 @@ stow -t ~/.config .config
 
 - [ ] Create isolated group for security-related processes
     
-- [ ] Apply group/role permissions via `permissions.conf`
-    
 - [ ] Git pre-commit hook that validates role/group
     
 - [ ] Only allow certain roles to modify specific scripts
-    
 
 ---
 
 ## 🧪 TESTS + RESEARCH
 
-- [ ] C project: `palabras.c` with dynamic memory and system calls
-    
-- [ ] C/ASM project: `5 en raya` integration with subroutines
-    
-- [ ] Java: UML-based class validators
-    
-- [ ] Markdown → LaTeX callouts conversion with Pandoc
-    
-- [ ] Markdown parser in C

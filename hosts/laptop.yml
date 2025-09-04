@@ -1,9 +1,0 @@
-name: laptop
-os: arch
-type: physical
-includes:
-  - zsh
-  - ssh
-  - neovim
-  - vpn
-

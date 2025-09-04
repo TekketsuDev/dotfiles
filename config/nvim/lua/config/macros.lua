@@ -1,37 +1,34 @@
--- Función segura para mover líneas en visual mode
-local function safe_move_lines(direction)
-  return function()
-    local first_line = vim.fn.line("'<")
-    local last_line = vim.fn.line("'>")
-    local total_lines = vim.fn.line("$")
+-- config/macros.lua
+local M = {}
 
-    if direction == "down" and last_line == total_lines then
-      return -- no puede bajar más
-    elseif direction == "up" and first_line == 1 then
-      return -- no puede subir más
-    end
-
-    local cmd = direction == "down"
-        and ":m '>+1<CR>gv=gv"
-        or ":m '<-2<CR>gv=gv"
-
-    vim.cmd(cmd)
+function M.cmp_mappings()
+  local ok, cmp = pcall(require, 'cmp')
+  if not ok then
+    return {}
   end
+
+  return cmp.mapping.preset.insert({
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping(function(fb)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fb()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fb)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fb()
+      end
+    end, { 'i', 's' }),
+    ['<C-e>'] = cmp.mapping.abort(),
+  })
 end
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = vim.fn.stdpath("config") .. "/lua/config/macros.lua",
-  callback = function()
-    package.loaded["config.macros"] = nil
-    require("config.macros")
-    vim.notify("macros recargado")
-  end,
-})
-
-vim.keymap.set("v", "<A-j>", safe_move_lines("down"), { desc = "Mover línea abajo" })
-vim.keymap.set("v", "<A-k>", safe_move_lines("up"), { desc = "Mover línea arriba" })
-
--- Indentar en visual mode
-vim.keymap.set("v", "<A-h>", "<gv", { desc = "Indentar izquierda" })
-vim.keymap.set("v", "<A-l>", ">gv", { desc = "Indentar derecha" })
-
+vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<CR>', { desc = 'Find Files' })
+return M

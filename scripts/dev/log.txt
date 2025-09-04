@@ -23,3 +23,4 @@
 /home/tekketsu/.config/hypr starts at jue 04 sep 2025 11:43:19 CEST
 /home/tekketsu starts at jue 04 sep 2025 11:53:11 CEST
 /home/tekketsu starts at jue 04 sep 2025 11:54:50 CEST
+/home/tekketsu/dotfiles/config/nvim/lua/config starts at jue 04 sep 2025 14:55:50 CEST

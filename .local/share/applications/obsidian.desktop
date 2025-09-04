@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Obsidian
+Exec=/home/tekketsu/.local/bin/Obsidian-1.8.10.AppImage --ozone-platform=wayland %u
+Terminal=false
+Type=Application
+Icon=/home/tekketsu/.local/bin/icons/obsidian.png
+StartupWMClass=obsidian
+Comment=Obsidian
+MimeType=x-scheme-handler/obsidian;
+Categories=Office;

@@ -1,0 +1,13 @@
+.callout[data-callout="custom-question-type"] {
+    --callout-color: 0, 0, 0;
+    --callout-icon: lucide-alert-circle;
+}
+.callout[data-callout="question"] {
+    --callout-color: 53, 146, 89;
+    
+}
+.callout[data-callout="pending"] {
+   --callout-color: 0,233,51;
+   --callout-icon: lucide-file-search;
+}
+

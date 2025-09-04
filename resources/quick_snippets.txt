@@ -1,0 +1,1 @@
+awk -F; NR>1 && $5!="" {count++} END {print count} EXTRACTO_CONDICIONES_VARIABLES.csv

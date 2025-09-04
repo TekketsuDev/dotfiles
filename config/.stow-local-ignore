@@ -1,0 +1,3 @@
+# Ignorados locales de Stow para "config"
+^nvm(/|$)
+^nvm(/|$)

@@ -1,0 +1,4 @@
+hyprland
+kitty
+waybar
+wl-clipboard

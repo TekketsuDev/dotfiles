@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Persona 5 Royal
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/1687950
+Icon=steam_icon_1687950
+Terminal=false
+Type=Application
+Categories=Game;

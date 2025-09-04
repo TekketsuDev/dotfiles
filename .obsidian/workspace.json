@@ -1,0 +1,253 @@
+{
+  "main": {
+    "id": "5c9f0bd9c6a4ab4b",
+    "type": "split",
+    "children": [
+      {
+        "id": "6fa7dfafe5502f0d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6bfa11428aa51220",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projects/Linux/dotfiles/Arch Dotfiles Objective.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Arch Dotfiles Objective"
+            }
+          },
+          {
+            "id": "028c27612f99c418",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Resoruces/Estudios/University/2025-UOC/SO - Sistemas Operativos/JametSoler_PAC1.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "JametSoler_PAC1"
+            }
+          },
+          {
+            "id": "771c2b2438aec193",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Resoruces/Estudios/University/2025-UOC/SO - Sistemas Operativos/PR-2/Introducción a la programación de Unix.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Introducción a la programación de Unix"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a437adfecc7457ae",
+    "type": "split",
+    "children": [
+      {
+        "id": "ccaffe10474f9105",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2dfaf5599b495397",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "66fe080da6933be4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 401.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "590ed321d44bb87d",
+    "type": "split",
+    "children": [
+      {
+        "id": "6eb5eea1d2f177e9",
+        "type": "tabs",
+        "dimension": 51,
+        "children": [
+          {
+            "id": "848a395d3ce3185b",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          },
+          {
+            "id": "b76a125318f61680",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "43442d185cba2fd5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Resoruces/Estudios/University/2025-UOC/SO - Sistemas Operativos/PR-2/Introducción a la programación de Unix.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Introducción a la programación de Unix"
+            }
+          },
+          {
+            "id": "01af099eae10b5a0",
+            "type": "leaf",
+            "state": {
+              "type": "planner-timeline",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Timeline"
+            }
+          }
+        ]
+      },
+      {
+        "id": "a99763fcc09e99f0",
+        "type": "tabs",
+        "dimension": 49,
+        "children": [
+          {
+            "id": "fcba24e4556a6638",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 377.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "graph:Open graph view": false,
+      "switcher:Open quick switcher": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "workspaces:Manage workspace layouts": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-day-planner:Open Timeline": false,
+      "obsidian-day-planner:Open Multi-Day View": false,
+      "obsidian-kanban:Create new board": false
+    }
+  },
+  "active": "771c2b2438aec193",
+  "lastOpenFiles": [
+    "Resoruces/Estudios/University/2025-UOC/SO - Sistemas Operativos/PR-2/Introducción a la programación de Unix.md",
+    "Resoruces/University/2025-UOC/SO - Sistemas Operativos/PR-2/Introducción a la programación de Unix.md",
+    "Resoruces/University/2025-UOC/SO - Sistemas Operativos/PR-2",
+    "Resoruces/University/2025-UOC/SO - Sistemas Operativos",
+    "Resoruces/University/2025-UOC",
+    "Resoruces/University",
+    "Resoruces/Estudios/University/2025-UOC/SO - Sistemas Operativos/PR-1/PR-1 Víctor Jamet.md",
+    "Resoruces/Estudios/University/.md",
+    "Resoruces/Estudios/University/2025-UOC/SO - Sistemas Operativos/PR-1/Introducción a los sistemas operativos.md",
+    "Resoruces/Estudios/University/2025-UOC/TER - Trabajo en Equipo en la red/RETO 1/Actividad R1.A1 - Debate sobre el trabajo en equipo.md",
+    "Resoruces/Estudios/University/2024-UOC/Administración y gestión de organizaciones/Reto1.md",
+    "Resoruces/Estudios/University/2024-UOC/Fundamentos de Programacion/PEC 1/PEC 1 - Program C.md",
+    "Resoruces/Estudios/University/2025-UOC/D-POO - Diseño y programación orientada a objetos/Guía de Java.md",
+    "Resoruces/Estudios/University/2025-UOC/D-POO - Diseño y programación orientada a objetos/Introducción al paradigma de la programación orientada a objetos.md",
+    "Projects/Linux/dotfiles/Tools/Firefox.md",
+    "Projects/Linux/dotfiles/Tools/Tmux.md",
+    "Projects/Linux/dotfiles/Tools/Snapper.md",
+    "Resoruces/Platform courses.md",
+    "Brain/Data/Screenshots/screenshot_2025-05-09_17-04-59.png",
+    "Resoruces/University/2025-UOC/EC - Estructura de computadores/Juego de instrucciones.md",
+    "Resoruces/University/2024-UOC/Administración y gestión de organizaciones/Imagenes/Captura de pantalla 2023-10-14 124459.png",
+    "Resoruces/University/2024-UOC/Fundamentos de Computadores/Images/Pasted image 20231004123313.png",
+    "Resoruces/University/2024-UOC/Fundamentos de Computadores/Images/Pasted image 20231004122730.png",
+    "Resoruces/University/2024-UOC/Fundamentos de Computadores/Images/7ba73ff97a5096fe7cfda16ed55cedcf.png",
+    "Resoruces/University/2025-UOC/AL- Algebra/R2 - Sistemas de ecuaciones lineales.md",
+    "Resoruces/University/2025-UOC/AL- Algebra/R2 -Elementos de algebra lineal y geometría.md",
+    "Resoruces/University/2025-UOC/SO - Sistemas Operativos/JametSoler_PAC1.md",
+    "Resoruces/University/2024-UOC/Administración y gestión de organizaciones/Reto1.md",
+    "Resoruces/University/2025-UOC/SO - Sistemas Operativos/PR-1/Introducción a los sistemas operativos.md",
+    "Resoruces/University/2025-UOC/IS - Ingenieria del Software/Introducción a la ingeniería del software.md",
+    "Resoruces/University/2025-UOC/IS - Ingenieria del Software/Orientación a objetos.md",
+    "Resoruces/University/2025-UOC/EC - Estructura de computadores/Annexo Intel x86-64 Instrucciones.md",
+    "Resoruces/University/2024-UOC/Fundamentos de Computadores/2. Representación de la información.md",
+    "Resoruces/University/2025-UOC/SO - Sistemas Operativos/PR-1/PR-1 Víctor Jamet.md",
+    "Resoruces/University/2024-UOC/Administración y gestión de organizaciones/Imagenes",
+    "Resoruces/University/2025-UOC/D-POO - Diseño y programación orientada a objetos",
+    "Resoruces/University/2025-UOC/EC - Estructura de computadores/Practicas PR1-2",
+    "Resoruces/University/2024-UOC/Administración y gestión de organizaciones",
+    "Resoruces/University/2025-UOC/TER - Trabajo en Equipo en la red/RETO 1",
+    "Resoruces/University/2024-UOC/Fundamentos de Computadores/Images",
+    "Brain/Data/Attachments/image2.png",
+    "Brain/Data/Screenshots/screenshot_2025-05-05_18-09-14.png",
+    "Untitled.canvas",
+    "Brain/Data/Screenshots/screenshot_2025-04-25_23-59-28.png",
+    "Brain/Data/Screenshots/screenshot_2025-04-25_21-58-56.png",
+    "Brain/Data/Screenshots/screenshot_2025-04-22_23-15-07.png"
+  ]
+}

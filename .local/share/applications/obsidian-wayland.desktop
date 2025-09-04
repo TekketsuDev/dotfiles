@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Obsidian
+Exec=obsidian --enable-features=UseOzonePlatform --ozone-platform-hint=wayland
+Icon=obsidian
+Type=Application
+Categories=Utility;TextEditor;
+StartupNotify=true
+Terminal=false
+

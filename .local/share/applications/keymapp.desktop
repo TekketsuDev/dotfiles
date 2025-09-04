@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Keymapp
+Comment=QMK/VIA keyboard configurator
+Exec=/home/tekketsu/.local/bin/keymapp
+Icon=keyboard
+Terminal=false
+Type=Application
+Categories=Utility;
+StartupNotify=false

@@ -1,0 +1,32 @@
+{
+  "promptDelete": false,
+  "readableLineLength": false,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "current",
+  "showUnsupportedFiles": true,
+  "vimMode": true,
+  "attachmentFolderPath": "Brain/Data/Attachments",
+  "mobileToolbarCommands": [
+    "editor:insert-wikilink",
+    "editor:toggle-bold",
+    "editor:toggle-code",
+    "editor:toggle-blockquote",
+    "editor:insert-link",
+    "editor:toggle-checklist-status",
+    "editor:undo",
+    "editor:redo",
+    "editor:configure-toolbar",
+    "editor:insert-table",
+    "editor:insert-callout",
+    "command-palette:open"
+  ],
+  "trashOption": "local",
+  "uriCallbacks": true,
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "Legal",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  }
+}

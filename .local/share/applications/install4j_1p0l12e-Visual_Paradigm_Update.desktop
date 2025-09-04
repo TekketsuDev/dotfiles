@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=Visual_Paradigm_Update_17.2
+Exec="/home/tekketsu/Visual_Paradigm_17.2/bin/Visual_Paradigm_Update" %U
+Icon=/home/tekketsu/Visual_Paradigm_17.2/.install4j/Visual_Paradigm_Update.png
+Categories=Application;
+StartupWMClass=install4j-com-vp-platform-installer-UpdateMain

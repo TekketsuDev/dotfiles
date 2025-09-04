@@ -1,0 +1,7 @@
+type,role,count
+aur,development,3
+aur,environment,2
+aur,other,19
+official,development,5
+official,environment,11
+official,other,112

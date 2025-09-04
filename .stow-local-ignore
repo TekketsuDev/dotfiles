@@ -1,0 +1,15 @@
+^scripts/
+^resources/
+^hosts/
+^env/
+^bin/
+^\.git/
+^\.gitignore$
+^\.github/
+^\.gitconfig$
+^README.md$
+^OBJECTIVE.md$
+^infra/
+^Makefile$
+^.obsidian/
+

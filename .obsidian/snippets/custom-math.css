@@ -1,0 +1,14 @@
+body {
+    background-color: red !important; /* Temporary background to test snippets */
+}
+
+/* Inline math (e.g., $E=mc^2$) */
+span.mathjax-inline {
+    font-size: 1.5em;
+}
+
+/* Block math (e.g., $$ E = mc^2 $$) */
+div.mathjax-display {
+    font-size: 1.8em;
+}
+

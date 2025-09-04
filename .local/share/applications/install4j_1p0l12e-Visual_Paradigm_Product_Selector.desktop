@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=Visual_Paradigm_Product_Selector_17.2
+Exec="/home/tekketsu/Visual_Paradigm_17.2/bin/Visual_Paradigm_Product_Selector" %U
+Icon=/home/tekketsu/Visual_Paradigm_17.2/.install4j/Visual_Paradigm_Product_Selector.png
+Categories=Application;
+StartupWMClass=install4j-v-RP

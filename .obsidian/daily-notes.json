@@ -1,0 +1,6 @@
+{
+  "folder": "Daily Review",
+  "template": "Brain/Templates/Daily Review 1",
+  "autorun": false,
+  "format": "M - MMM, Y/ Do dddd, MMM"
+}

@@ -1,0 +1,11 @@
+**/zsh_history
+**/.zcompdump*
+.cargo
+.git
+.github
+.config/.oh-my-zsh
+.config/JetBrains/IntelliJIdea2024.3/settingsSync
+env/
+.config/nvm
+.config/nvm/
+.config/nvm/

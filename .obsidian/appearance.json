@@ -1,0 +1,11 @@
+{
+  "accentColor": "#359259",
+  "cssTheme": "Everforest",
+  "theme": "obsidian",
+  "enabledCssSnippets": [
+    "callouts"
+  ],
+  "nativeMenus": false,
+  "baseFontSize": 22,
+  "baseFontSizeAction": true
+}

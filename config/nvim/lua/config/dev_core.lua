@@ -20,3 +20,19 @@ vim.diagnostic.config({
 -- Small perf wins
 vim.opt.lazyredraw = true
 vim.opt.synmaxcol = 240
+
+require('nvim-treesitter.configs').setup({
+  highlight = { enable = true }, -- ¡imprescindible!
+  rainbow = {
+    enable = true,
+    query = 'rainbow-parens',
+    strategy = require('ts-rainbow.strategy.global'),
+  },
+})
+vim.api.nvim_set_hl(0, 'RainbowDelimiterRed', { fg = '#E06C75' })
+vim.api.nvim_set_hl(0, 'RainbowDelimiterYellow', { fg = '#E5C07B' })
+vim.api.nvim_set_hl(0, 'RainbowDelimiterBlue', { fg = '#61AFEF' })
+vim.api.nvim_set_hl(0, 'RainbowDelimiterOrange', { fg = '#D19A66' })
+vim.api.nvim_set_hl(0, 'RainbowDelimiterGreen', { fg = '#98C379' })
+vim.api.nvim_set_hl(0, 'RainbowDelimiterViolet', { fg = '#C678DD' })
+vim.api.nvim_set_hl(0, 'RainbowDelimiterCyan', { fg = '#56B6C2' })

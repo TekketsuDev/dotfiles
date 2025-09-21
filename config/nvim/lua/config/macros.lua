@@ -1,4 +1,5 @@
 -- config/macros.lua
+-- config/macros.lua
 local M = {}
 
 function M.cmp_mappings()
@@ -6,7 +7,6 @@ function M.cmp_mappings()
   if not ok then
     return {}
   end
-
   return cmp.mapping.preset.insert({
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -30,5 +30,7 @@ function M.cmp_mappings()
   })
 end
 
+-- Usa which-key o set directo, pero no ambos para la misma tecla
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<CR>', { desc = 'Find Files' })
+
 return M

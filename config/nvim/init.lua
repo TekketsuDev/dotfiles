@@ -1,3 +1,6 @@
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ',' -- optional, for local leader
+
 require('config.lazy')
 require('config.macros')
 pcall(require, 'config.dev_core')
@@ -41,15 +44,13 @@ vim.opt.relativenumber = true
 vim.o.undofile = true
 
 -- Decrease update time
+vim.o.timeout = true
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 
 -- Set terminal gui colors to true
 vim.o.termguicolors = true
 -- Example: set leader to space
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' ' -- optional, for local leader
-
 -- Desactiva relativenumber en modo insert
 vim.api.nvim_create_autocmd('InsertEnter', {
   callback = function()

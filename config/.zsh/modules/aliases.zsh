@@ -39,3 +39,6 @@ gcc-win() {
         echo "❌ Compilation failed."
         return 1
     fi}
+alias cmake-debug='cmake -S . -B build/debug -DCMAKE_BUILD_TYPE=Debug && cmake --build build/debug -j && (cd build/debug && ctest --output-on-failure)'
+alias cmake-release='cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release && cmake --build build/release -j && (cd build/release && ctest --output-on-failure)'
+

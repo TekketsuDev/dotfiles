@@ -44,5 +44,5 @@ export KEYMAPP_SOCKET="$XDG_CONFIG_HOME/keymapp/keymapp.sock"
 export PATH="$HOME/projects/kontroll/target/release:$PATH"
 # Custom bin paths
 export PATH="$HOME/bin:$LOCAL_HOME/bin:$PATH"
-export USER="vjamet-s"
-export MAIL="vjamet-s@student.42barcelona.com"
+#export USER="vjamet-s"
+#export MAIL="vjamet-s@student.42barcelona.com"

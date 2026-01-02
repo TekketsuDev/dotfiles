@@ -33,12 +33,12 @@
         {
             "type": "shell",
             "key": " ",
-            "keyColor": "yellow"
+            "keyColor": "green"
         },
         {
             "type": "terminal",
             "key": " ",
-            "keyColor": "blue"
+            "keyColor": "cyan"
         },
         /*
         {
@@ -54,10 +54,16 @@
             // format: used / total
             "format": "{1} / {2}"
         },
+      {
+  "type": "command",
+  "key": "󱎫 ",
+  "text": "ms=$(cat \"$HOME/.cache/zsh-load-ms\" 2>/dev/null | tr -d '\\n'); [ -n \"$ms\" ] && printf 'Shell load : %s ms' \"$ms\" || printf 'Shell load : n/a'"
+},
+
         {
             "type": "uptime",
             "key": "󰔛 ",
-            "keyColor": "green"
+            "keyColor": "white"
         },
         {
             "type": "custom",

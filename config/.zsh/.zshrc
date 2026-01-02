@@ -1,66 +1,117 @@
-# ~/.zshrc (Main Loader) — FAST & CLEAN
+# ~/.zshrc — FAST, CLEAN & PROFILED
+# ==================================
 
 # 0) Salir rápido si no es interactivo
 [[ $- != *i* ]] && return
 
-# 1) Entorno temprano (sin spamear PATH)
+# ───────────────────────────────
+# 1) Medición de tiempo (START)
+# ───────────────────────────────
+zmodload zsh/datetime
+ZSH_START_TIME=$EPOCHREALTIME
+
+# ───────────────────────────────
+# 2) Entorno temprano (rápido)
+# ───────────────────────────────
 source "$HOME/dotfiles/config/.zsh/modules/env.zsh"
 
-
-# ================================
-# Load Env
-# ================================
-
+# ───────────────────────────────
+# 3) Oh My Zsh (mínimo)
+# ───────────────────────────────
 export ZSH="$CONFIG_HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
-ZSH_THEME="xiong-chiamiov-plus"
+# ZSH_THEME="xiong-chiamiov-plus"
 
-# Orden de plugins: lo más pesado al final
+# ⚠️ IMPORTANTE:
+# NO cargamos aquí autosuggestions ni syntax-highlighting
+# los haremos lazy más abajo
 plugins=(
   git
   archlinux
   zoxide
-  nvm               # lo haremos lazy más abajo
-  zsh-autosuggestions
-  zsh-syntax-highlighting
 )
 
-# ================================
-# Load & History
-# ================================
+# Evita compfix lento de OMZ
+export ZSH_DISABLE_COMPFIX=true
+
+# ───────────────────────────────
+# 4) Historial + completions
+# ───────────────────────────────
 HISTFILE=~/.config/.zsh/zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
+
+# Evita paths rotos de vendor completions (docker)
+if [[ ! -d /usr/share/zsh/vendor-completions ]]; then
+  fpath=(${fpath:#/usr/share/zsh/vendor-completions})
+fi
+
 autoload -Uz compinit
 compinit -C
 
-# Evita compfix lento de OMZ en algunos setups
-export ZSH_DISABLE_COMPFIX=true
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.cache/zsh
 
-source $ZSH/oh-my-zsh.sh
+# ───────────────────────────────
+# 5) Cargar OMZ
+# ───────────────────────────────
+# Pure prompt (bootstrap once)
+PURE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/pure"
 
-# 3) Plugins externos ligeros
+if [[ ! -d "$PURE_DIR" ]]; then
+  command mkdir -p "${PURE_DIR:h}"
+  command git clone --depth=1 https://github.com/sindresorhus/pure.git "$PURE_DIR" >/dev/null 2>&1
+fi
+
+fpath=("$PURE_DIR" $fpath)
+autoload -U promptinit; promptinit
+prompt pure
+
+source "$ZSH/oh-my-zsh.sh"
+
+# ───────────────────────────────
+# 6) Plugins ligeros externos
+# ───────────────────────────────
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# 4) zoxide (rápido)
 eval "$(zoxide init zsh)"
 
-# 5) NVM LAZY (autoload al primer uso)
-#   No cargues nvm siempre; define wrappers que lo cargan solo cuando hace falta.
-#
-# source /usr/share/nvm/init-nvm.sh
+# ───────────────────────────────
+# 7) Autosuggestions & Highlighting (LAZY LOAD)
+# ───────────────────────────────
+autoload -Uz add-zsh-hook
 
+_load_zsh_extras() {
+  [[ -n ${ZSH_EXTRAS_LOADED+x} ]] && return
+  ZSH_EXTRAS_LOADED=1
+
+  ZSH_AUTOSUGGEST_USE_ASYNC=1
+  ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+  source "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  source "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+  bindkey -r '^[[200~' 2>/dev/null
+  bindkey -r '^[[201~' 2>/dev/null
+}
+
+add-zsh-hook precmd _load_zsh_extras
+
+# ───────────────────────────────
+# 8) NVM — Lazy real
+# ───────────────────────────────
 _nvm_lazy_load() {
   unfunction node npm npx corepack yarn yarnpkg 2>/dev/null || true
   export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
-  # usa tu init real; en tu caso tienes /usr/share/nvm/init-nvm.sh
+
   if [ -f /usr/share/nvm/init-nvm.sh ]; then
     source /usr/share/nvm/init-nvm.sh
   elif [ -s "$NVM_DIR/nvm.sh" ]; then
     source "$NVM_DIR/nvm.sh"
   fi
 }
+
 for _cmd in node npm npx corepack yarn yarnpkg; do
   eval "
   function $_cmd() {
@@ -69,16 +120,36 @@ for _cmd in node npm npx corepack yarn yarnpkg; do
   }"
 done
 
-# solo en TTY real + una vez por sesión
-if [[ -t 1 && -z ${FASTFETCH_SHOWN+x} ]]; then
+
+
+# ───────────────────────────────
+# 9) Modular sources
+# ───────────────────────────────
+source "$DOTFILES_CONFIG/.zsh/modules/aliases.zsh"
+# source "$DOTFILES_CONFIG/.zsh/modules/functions.zsh"
+source "$DOTFILES_CONFIG/.zsh/modules/navigation.zsh"
+# source "$DOTFILES_CONFIG/.zsh/modules/collectors.zsh"
+# source "$DOTFILES_CONFIG/.zsh/modules/diagrams.zsh"
+
+# ───────────────────────────────
+# 10) Medición de tiempo (END)
+# ───────────────────────────────
+typeset -gF _ZSH_END_TIME=${EPOCHREALTIME}
+typeset -gi ZSH_LOAD_MS=$(( (_ZSH_END_TIME - ZSH_START_TIME) * 1000 ))
+# Guardar tiempo para fastfetch
+printf "%s\n" "$ZSH_LOAD_MS" > "$XDG_RUNTIME_DIR/zsh-load-ms"
+printf "%s\n" "$ZSH_LOAD_MS" > "$HOME/.cache/zsh-load-ms"
+unset _ZSH_END_TIME
+
+# ───────────────────────────────
+# 11) Fastfetch
+# ───────────────────────────────
+if [[ -t 1 \
+   && -z ${FASTFETCH_SHOWN+x} \
+   && -z ${NVIM+x} \
+   && -z ${VIM+x} \
+   && -z ${TERM_PROGRAM+x} \
+   ]]; then
   FASTFETCH_SHOWN=1
   fastfetch -c "$HOME/.config/fastfetch/config-compact.jsonc"
 fi
-
-# ──────[ Modular Sources ]──────
-source $DOTFILES_CONFIG/.zsh/modules/aliases.zsh
-#source $DOTFILES_CONFIG/.zsh/modules/functions.zsh
-source $DOTFILES_CONFIG/.zsh/modules/navigation.zsh
-#source $DOTFILES_CONFIG/.zsh/modules/collectors.zsh
-#source $DOTFILES_CONFIG/.zsh/modules/diagrams.zsh
-

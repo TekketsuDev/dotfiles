@@ -1,30 +1,26 @@
-# ~/.zshrc — FAST, CLEAN & PROFILED
+# ~/.zshrc
 # ==================================
 
-# 0) Salir rápido si no es interactivo
 [[ $- != *i* ]] && return
 
 # ───────────────────────────────
-# 1) Medición de tiempo (START)
+# 1) Time
 # ───────────────────────────────
 zmodload zsh/datetime
 ZSH_START_TIME=$EPOCHREALTIME
 
 # ───────────────────────────────
-# 2) Entorno temprano (rápido)
+# 2) Entorno temprano 
 # ───────────────────────────────
 source "$HOME/dotfiles/config/.zsh/modules/env.zsh"
 
 # ───────────────────────────────
-# 3) Oh My Zsh (mínimo)
+# 3) Oh My Zsh 
 # ───────────────────────────────
 export ZSH="$CONFIG_HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
-# ZSH_THEME="xiong-chiamiov-plus"
 
-# ⚠️ IMPORTANTE:
-# NO cargamos aquí autosuggestions ni syntax-highlighting
-# los haremos lazy más abajo
+
 plugins=(
   git
   archlinux
@@ -42,7 +38,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-# Evita paths rotos de vendor completions (docker)
+
 if [[ ! -d /usr/share/zsh/vendor-completions ]]; then
   fpath=(${fpath:#/usr/share/zsh/vendor-completions})
 fi
@@ -56,7 +52,6 @@ zstyle ':completion:*' cache-path ~/.cache/zsh
 # ───────────────────────────────
 # 5) Cargar OMZ
 # ───────────────────────────────
-# Pure prompt (bootstrap once)
 PURE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/pure"
 
 if [[ ! -d "$PURE_DIR" ]]; then
@@ -78,7 +73,7 @@ source "$ZSH/oh-my-zsh.sh"
 eval "$(zoxide init zsh)"
 
 # ───────────────────────────────
-# 7) Autosuggestions & Highlighting (LAZY LOAD)
+# 7) Autosuggestions & Highlighting
 # ───────────────────────────────
 autoload -Uz add-zsh-hook
 
@@ -91,9 +86,8 @@ _load_zsh_extras() {
 
   source "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
   source "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-  bindkey -r '^[[200~' 2>/dev/null
-  bindkey -r '^[[201~' 2>/dev/null
+bindkey '^[[200~' bracketed-paste
+bindkey '^[[201~' bracketed-paste
 }
 
 add-zsh-hook precmd _load_zsh_extras
@@ -132,7 +126,7 @@ source "$DOTFILES_CONFIG/.zsh/modules/navigation.zsh"
 # source "$DOTFILES_CONFIG/.zsh/modules/diagrams.zsh"
 
 # ───────────────────────────────
-# 10) Medición de tiempo (END)
+# 10) Time Measure
 # ───────────────────────────────
 typeset -gF _ZSH_END_TIME=${EPOCHREALTIME}
 typeset -gi ZSH_LOAD_MS=$(( (_ZSH_END_TIME - ZSH_START_TIME) * 1000 ))

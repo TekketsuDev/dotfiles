@@ -42,6 +42,15 @@ gcc-win() {
 alias cmake-debug='cmake -S . -B build/debug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && cmake --build build/debug -j && ln -sf build/debug/compile_commands.json .'
 alias cmake-release='cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release && cmake --build build/release -j'
 
+# tmux: no-args → workspace layout, otherwise pass through
+function tmux() {
+  if [[ $# -eq 0 ]]; then
+    "$DOTFILES_SCRIPTS/dev/workspace.sh" "$PWD"
+  else
+    command tmux "$@"
+  fi
+}
+
 # dev environments (nvim + claude code side pane)
 alias devenv="$DOTFILES_SCRIPTS/dev/devenv.sh"
 alias dev-c="$DOTFILES_SCRIPTS/dev/devenv.sh c"

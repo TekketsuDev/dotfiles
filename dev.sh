@@ -289,6 +289,11 @@ do_gitea_pull() {
   log "Done"
 }
 
+do_workspace() {
+  local dir="${1:-$PWD}"
+  bash "$REPO_ROOT/scripts/dev/workspace.sh" "$dir"
+}
+
 do_edit_ignore() {
   mkdir -p "$REPO_ROOT/config"
   : >/dev/null # no-op
@@ -320,6 +325,7 @@ Usage: dev <command>
   apply              Apply stow configs (backs up conflicts)
   adopt              Adopt configs from HOME into repo, then apply
   sync               git add/commit/push (pull if clean)
+  workspace [dir]    Launch dev workspace (neovim + lazygit layout)
   edit-ignore        Open config/.stow-local-ignore in \$EDITOR
   install            Create 'dev' launcher in ~/.local/bin
 
@@ -359,6 +365,10 @@ adopt)
 sync)
   shift
   do_sync "$@"
+  ;;
+workspace)
+  shift
+  do_workspace "$@"
   ;;
 edit-ignore)
   shift

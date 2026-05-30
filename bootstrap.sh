@@ -165,6 +165,21 @@ apply_nix_profile() {
   log "Nix profile '$profile' applied"
 }
 
+# ─── install claude code ─────────────────────────────────────────────────────
+install_claude() {
+  if command -v claude &>/dev/null; then
+    log "Claude Code already installed ($(claude --version 2>/dev/null || echo 'unknown version'))"
+    return
+  fi
+  if ! command -v npm &>/dev/null; then
+    warn "npm not found — skipping Claude Code install (run after Nix profile is active)"
+    return
+  fi
+  step "Installing Claude Code"
+  npm install -g @anthropic-ai/claude-code
+  log "Claude Code installed"
+}
+
 # ─── install tmux plugin manager ─────────────────────────────────────────────
 install_tpm() {
   local tpm_dir="${HOME}/.config/tmux/plugins/tpm"
@@ -328,6 +343,7 @@ main() {
   set_default_shell
   install_omz
   install_tpm
+  install_claude
 
   if [[ "$SKIP_STOW" -eq 0 ]]; then
     apply_stow

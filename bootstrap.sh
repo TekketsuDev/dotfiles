@@ -165,6 +165,27 @@ apply_nix_profile() {
   log "Nix profile '$profile' applied"
 }
 
+# ─── set default shell to zsh ────────────────────────────────────────────────
+set_default_shell() {
+  local zsh_path
+  zsh_path="$(command -v zsh 2>/dev/null || true)"
+  if [[ -z "$zsh_path" ]]; then
+    warn "zsh not found, skipping shell change"
+    return
+  fi
+  if [[ "$SHELL" == "$zsh_path" ]]; then
+    log "Default shell already zsh"
+    return
+  fi
+  # Ensure zsh is in /etc/shells
+  if ! grep -qxF "$zsh_path" /etc/shells 2>/dev/null; then
+    echo "$zsh_path" | sudo tee -a /etc/shells >/dev/null
+  fi
+  step "Setting default shell to zsh"
+  sudo chsh -s "$zsh_path" "$(whoami)"
+  log "Default shell set to $zsh_path — open a new terminal to apply"
+}
+
 # ─── stow configs ─────────────────────────────────────────────────────────────
 apply_stow() {
   step "Applying stow configs"
@@ -261,6 +282,8 @@ main() {
   else
     warn "Skipping Nix install (--skip-nix)"
   fi
+
+  set_default_shell
 
   if [[ "$SKIP_STOW" -eq 0 ]]; then
     apply_stow

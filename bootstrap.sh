@@ -186,7 +186,11 @@ install_omz() {
     log "oh-my-zsh already installed at $omz_dir"
   else
     step "Installing oh-my-zsh"
-    ZSH="$omz_dir" sh <(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended --keep-zshrc
+    local omz_install
+    omz_install="$(mktemp)"
+    curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o "$omz_install"
+    ZSH="$omz_dir" RUNZSH=no CHSH=no bash "$omz_install" --unattended --keep-zshrc
+    rm -f "$omz_install"
     log "oh-my-zsh installed"
   fi
 

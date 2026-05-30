@@ -165,6 +165,18 @@ apply_nix_profile() {
   log "Nix profile '$profile' applied"
 }
 
+# ─── install tmux plugin manager ─────────────────────────────────────────────
+install_tpm() {
+  local tpm_dir="${HOME}/.config/tmux/plugins/tpm"
+  if [[ -d "$tpm_dir" ]]; then
+    log "TPM already installed"
+    return
+  fi
+  step "Installing TPM (tmux plugin manager)"
+  git clone --depth=1 https://github.com/tmux-plugins/tpm "$tpm_dir"
+  log "TPM installed — press prefix+I inside tmux to install plugins"
+}
+
 # ─── install oh-my-zsh + plugins ─────────────────────────────────────────────
 install_omz() {
   local omz_dir="${HOME}/.config/.oh-my-zsh"
@@ -311,6 +323,7 @@ main() {
 
   set_default_shell
   install_omz
+  install_tpm
 
   if [[ "$SKIP_STOW" -eq 0 ]]; then
     apply_stow

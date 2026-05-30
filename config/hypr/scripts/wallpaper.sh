@@ -1,16 +1,18 @@
 #!/bin/bash
 
-directory=~/dotfiles/resources/Wallpapers/everforest
-monitor=`hyprctl monitors | grep Monitor | awk '{print $2}'`
+WALLPAPER_DIR=~/dotfiles/resources/Wallpapers/everforest
+HOUR=$(date +%H)
 
-if [ -d "$directory" ]; then
-    random_background=$(find "$directory" -type f \( -iname "*.jpg" -o -iname "*.png" \)  | shuf -n 1)
-
-    hyprctl hyprpaper unload all
-    hyprctl hyprpaper preload $random_background
-    
-    for monitor in $(hyprctl monitors | grep Monitor | awk '{print $2}'); do
-        hyprctl hyprpaper wallpaper "$monitor,$random_background"
-    done
-
+# Day: 07:00–20:00 → summer-day, otherwise summer-night
+if [[ "$HOUR" -ge 7 && "$HOUR" -lt 20 ]]; then
+  WALLPAPER="$WALLPAPER_DIR/summer-day.png"
+else
+  WALLPAPER="$WALLPAPER_DIR/summer-night.png"
 fi
+
+hyprctl hyprpaper unload all
+hyprctl hyprpaper preload "$WALLPAPER"
+
+for monitor in $(hyprctl monitors | grep Monitor | awk '{print $2}'); do
+  hyprctl hyprpaper wallpaper "$monitor,$WALLPAPER"
+done

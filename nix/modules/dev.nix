@@ -3,8 +3,7 @@
   home.packages = with pkgs; [
     # --- core build ---
     gcc
-    clang
-    clang-tools       # clangd LSP + clang-format
+    clang-tools       # clangd LSP + clang-format (no clang compiler to avoid ld.gold conflict with gcc)
     cmake
     gnumake
     ninja
@@ -15,11 +14,11 @@
 
     # --- raylib + C/C++ game dev ---
     raylib
-    xorg.libX11
-    xorg.libXrandr
-    xorg.libXinerama
-    xorg.libXcursor
-    xorg.libXi
+    libx11
+    libxrandr
+    libxinerama
+    libxcursor
+    libxi
     libGL
     wayland
 

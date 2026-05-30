@@ -165,6 +165,32 @@ apply_nix_profile() {
   log "Nix profile '$profile' applied"
 }
 
+# ─── install oh-my-zsh + plugins ─────────────────────────────────────────────
+install_omz() {
+  local omz_dir="${HOME}/.config/.oh-my-zsh"
+  local custom_dir="${omz_dir}/custom/plugins"
+
+  if [[ -d "$omz_dir" ]]; then
+    log "oh-my-zsh already installed at $omz_dir"
+  else
+    step "Installing oh-my-zsh"
+    ZSH="$omz_dir" sh <(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended --keep-zshrc
+    log "oh-my-zsh installed"
+  fi
+
+  # zsh-autosuggestions
+  if [[ ! -d "$custom_dir/zsh-autosuggestions" ]]; then
+    log "Installing zsh-autosuggestions"
+    git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "$custom_dir/zsh-autosuggestions"
+  fi
+
+  # zsh-syntax-highlighting
+  if [[ ! -d "$custom_dir/zsh-syntax-highlighting" ]]; then
+    log "Installing zsh-syntax-highlighting"
+    git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting "$custom_dir/zsh-syntax-highlighting"
+  fi
+}
+
 # ─── set default shell to zsh ────────────────────────────────────────────────
 set_default_shell() {
   local zsh_path
@@ -284,6 +310,7 @@ main() {
   fi
 
   set_default_shell
+  install_omz
 
   if [[ "$SKIP_STOW" -eq 0 ]]; then
     apply_stow

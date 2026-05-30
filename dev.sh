@@ -18,6 +18,14 @@ set -euo pipefail
 
 export LC_ALL=C
 
+# --- machine config (profile, gitea remote) ---
+MACHINE_CONF_FILE=""
+
+load_machine_conf() {
+  MACHINE_CONF_FILE="$REPO_ROOT/.machine.conf"
+  [[ -f "$MACHINE_CONF_FILE" ]] && . "$MACHINE_CONF_FILE" || true
+}
+
 # --- localizar repo (aunque se invoque por PATH) ---
 SCRIPT_PATH="$(readlink -f -- "${BASH_SOURCE[0]}")" 2>/dev/null || SCRIPT_PATH="${BASH_SOURCE[0]}"
 REPO_ROOT="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
@@ -197,6 +205,90 @@ do_apply() {
   fi
 }
 
+# ─── gitea commands ──────────────────────────────────────────────────────────
+
+do_gitea_add() {
+  local url="${1:-}"
+  if [[ -z "$url" ]]; then
+    err "Usage: dev gitea-add <url>  (e.g. git@192.168.1.10:tekketsu/dotfiles.git)"
+  fi
+  bash "$REPO_ROOT/scripts/gitea/setup-gitea-remote.sh" "$url"
+}
+
+do_gitea_push() {
+  load_machine_conf
+  local gitea_url="${GITEA_REMOTE_URL:-}"
+  [[ -z "$gitea_url" ]] && err "Gitea not configured. Run: dev gitea-add <url>"
+
+  log "gitea-push: syncing to Gitea"
+  git -C "$REPO_ROOT" fetch --all --prune || true
+  if ! git_dirty; then
+    git -C "$REPO_ROOT" pull --rebase origin "$BRANCH" || true
+  fi
+  git -C "$REPO_ROOT" push -u gitea "$BRANCH"
+  log "Pushed to Gitea: $gitea_url"
+}
+
+do_gitea_release() {
+  load_machine_conf
+  local profile="${1:-${DOTFILES_PROFILE:-}}"
+  [[ -z "$profile" ]] && err "Usage: dev gitea-release <profile>  (arch-desktop|wsl|ct-minimal|ubuntu)"
+  local gitea_url="${GITEA_REMOTE_URL:-}"
+  [[ -z "$gitea_url" ]] && err "Gitea not configured. Run: dev gitea-add <url>"
+
+  local tag="${profile}-$(date +%Y.%m.%d)"
+  log "Creating release tag: $tag"
+  git -C "$REPO_ROOT" tag -f "$tag" -m "Release $tag"
+  git -C "$REPO_ROOT" push -u gitea "$BRANCH"
+  git -C "$REPO_ROOT" push gitea "$tag" --force
+  # Also advance the stable pointer
+  git -C "$REPO_ROOT" tag -f "${profile}-stable" -m "Latest stable for $profile"
+  git -C "$REPO_ROOT" push gitea "${profile}-stable" --force
+  log "Released: $tag  (${profile}-stable updated)"
+}
+
+do_gitea_unmirror() {
+  load_machine_conf
+  local repo="${1:-$(basename "$REPO_ROOT")}"
+  local gitea_host="${GITEA_HOST:-192.168.10.10}"
+  local gitea_port="${GITEA_HTTP_PORT:-3000}"
+  local token="${GITEA_TOKEN:-}"
+  [[ -z "$token" ]] && err "GITEA_TOKEN not set in .machine.conf"
+
+  log "Disabling mirror for: $repo"
+  local status
+  status=$(curl -s -o /dev/null -w "%{http_code}" \
+    -X PATCH "http://${gitea_host}:${gitea_port}/api/v1/repos/${DOTFILES_USER:-tekketsu}/${repo}" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: token ${token}" \
+    -d '{"mirror":false}')
+
+  if [[ "$status" == "200" ]]; then
+    log "Mirror disabled — repo is now writable. Push with: git push gitea main"
+  else
+    err "Failed to disable mirror (HTTP $status)"
+  fi
+}
+
+do_gitea_pull() {
+  load_machine_conf
+  local profile="${1:-${DOTFILES_PROFILE:-}}"
+  [[ -z "$profile" ]] && err "Profile unknown. Run bootstrap.sh or pass profile as arg."
+  local gitea_url="${GITEA_REMOTE_URL:-}"
+  [[ -z "$gitea_url" ]] && err "Gitea not configured. Run: dev gitea-add <url>"
+
+  log "gitea-pull: fetching ${profile}-stable from Gitea"
+  git -C "$REPO_ROOT" fetch gitea
+  # Merge only if on main and clean
+  if ! git_dirty; then
+    git -C "$REPO_ROOT" merge "gitea/${BRANCH}" --ff-only || \
+      log "Fast-forward not possible — run 'dev apply' to re-apply configs"
+  else
+    log "repo dirty — skipping merge, only fetched"
+  fi
+  log "Done"
+}
+
 do_edit_ignore() {
   mkdir -p "$REPO_ROOT/config"
   : >/dev/null # no-op
@@ -222,25 +314,31 @@ do_install() {
 
 usage() {
   cat <<EOF
-Uso: dev <preview|apply|adopt|sync|edit-ignore|install>
+Usage: dev <command>
 
-  preview       Muestra qué symlinks crearía (no modifica nada)
-  apply         Aplica stow priorizando el repo (hace backup de conflictos)
-  adopt         Adopta desde HOME al repo y aplica
-  sync          git add/commit/push (pull si repo limpio)
-  edit-ignore   Abre config/.stow-local-ignore en \$EDITOR
-  install       Crea el launcher 'dev' en ~/.local/bin y asegura PATH
+  preview            Dry-run: show what symlinks would be created
+  apply              Apply stow configs (backs up conflicts)
+  adopt              Adopt configs from HOME into repo, then apply
+  sync               git add/commit/push (pull if clean)
+  edit-ignore        Open config/.stow-local-ignore in \$EDITOR
+  install            Create 'dev' launcher in ~/.local/bin
+
+  gitea-add <url>    Add Gitea remote (git@host:user/repo.git)
+  gitea-push         Push main branch to Gitea
+  gitea-release [p]  Tag + push a stable release for a profile
+  gitea-pull  [p]    Pull latest from Gitea for this machine's profile
 
 Variables:
-  PACKAGES="config home"   # limita paquetes a procesar
-  BRANCH=main              # rama git
-  MESSAGE="..."            # mensaje de commit
+  PACKAGES="config home"   limit packages processed
+  BRANCH=main              git branch
+  MESSAGE="..."            commit message
 
-Ejemplos:
+Examples:
   dev preview
   dev apply
+  dev gitea-add git@192.168.1.10:tekketsu/dotfiles.git
+  dev gitea-release arch-desktop
   PACKAGES="config" dev adopt
-  MESSAGE="feat: update dotfiles" dev sync
 EOF
 }
 
@@ -269,6 +367,26 @@ edit-ignore)
 install)
   shift
   do_install "$@"
+  ;;
+gitea-add)
+  shift
+  do_gitea_add "$@"
+  ;;
+gitea-push)
+  shift
+  do_gitea_push "$@"
+  ;;
+gitea-release)
+  shift
+  do_gitea_release "$@"
+  ;;
+gitea-pull)
+  shift
+  do_gitea_pull "$@"
+  ;;
+gitea-unmirror)
+  shift
+  do_gitea_unmirror "$@"
   ;;
 apply-live)
   shift

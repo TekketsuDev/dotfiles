@@ -39,6 +39,14 @@ gcc-win() {
         echo "❌ Compilation failed."
         return 1
     fi}
-alias cmake-debug='cmake -S . -B build/debug -DCMAKE_BUILD_TYPE=Debug && cmake --build build/debug -j && (cd build/debug && ctest --output-on-failure)'
-alias cmake-release='cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release && cmake --build build/release -j && (cd build/release && ctest --output-on-failure)'
+alias cmake-debug='cmake -S . -B build/debug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && cmake --build build/debug -j && ln -sf build/debug/compile_commands.json .'
+alias cmake-release='cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release && cmake --build build/release -j'
+
+# dev environments (nvim + claude code side pane)
+alias devenv="$DOTFILES_SCRIPTS/dev/devenv.sh"
+alias dev-c="$DOTFILES_SCRIPTS/dev/devenv.sh c"
+alias dev-cpp="$DOTFILES_SCRIPTS/dev/devenv.sh cpp"
+alias dev-raylib="$DOTFILES_SCRIPTS/dev/devenv.sh raylib"
+alias dev-react="$DOTFILES_SCRIPTS/dev/devenv.sh react"
+alias dev-esp32="$DOTFILES_SCRIPTS/dev/devenv.sh esp32"
 

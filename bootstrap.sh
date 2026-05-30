@@ -176,8 +176,16 @@ install_claude() {
     return
   fi
   step "Installing Claude Code"
+  # npm global prefix must be user-writable — Nix store is read-only
+  local npm_prefix="$HOME/.local/share/npm-global"
+  mkdir -p "$npm_prefix"
+  npm config set prefix "$npm_prefix"
+  # Ensure it's on PATH
+  export PATH="$npm_prefix/bin:$PATH"
+  grep -qxF "export PATH=\"\$HOME/.local/share/npm-global/bin:\$PATH\"" "$HOME/.zshrc" 2>/dev/null || \
+    echo 'export PATH="$HOME/.local/share/npm-global/bin:$PATH"' >> "$HOME/.zshrc"
   npm install -g @anthropic-ai/claude-code
-  log "Claude Code installed"
+  log "Claude Code installed — restart shell or: export PATH=\"$npm_prefix/bin:\$PATH\""
 }
 
 # ─── install tmux plugin manager ─────────────────────────────────────────────

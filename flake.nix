@@ -26,6 +26,7 @@
             home.username     = if user != "" then user else "tekketsu";
             home.homeDirectory = if home != "" then home else "/home/tekketsu";
             home.stateVersion = "24.11";
+            home.enableNixpkgsReleaseCheck = false;
             programs.home-manager.enable = true;
           }
         ];

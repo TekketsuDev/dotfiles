@@ -32,8 +32,7 @@
 
     # --- react / js ---
     nodejs_22
-    nodePackages.npm
-    nodePackages.pnpm
+    pnpm
     bun
 
     # --- rust ---

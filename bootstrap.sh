@@ -209,6 +209,15 @@ install_omz() {
     log "oh-my-zsh installed"
   fi
 
+  # tmux-resurrect + tmux-continuum
+  local tpm_plugins="${HOME}/.config/tmux/plugins"
+  for plugin in tmux-resurrect tmux-continuum; do
+    if [[ ! -d "$tpm_plugins/$plugin" ]]; then
+      log "Installing tmux plugin: $plugin"
+      git clone --depth=1 "https://github.com/tmux-plugins/$plugin" "$tpm_plugins/$plugin"
+    fi
+  done
+
   # zsh-autosuggestions
   if [[ ! -d "$custom_dir/zsh-autosuggestions" ]]; then
     log "Installing zsh-autosuggestions"
